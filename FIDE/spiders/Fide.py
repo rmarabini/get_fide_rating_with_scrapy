@@ -6,7 +6,6 @@ class FideSpider(scrapy.Spider):
 
     def __init__(self, fide_id=None, *args, **kwargs):
         super(FideSpider, self).__init__(*args, **kwargs)
-        self.fide_id = fide_id
         self.fide_ids = [
             22226141,
             32066171,
@@ -24,8 +23,6 @@ class FideSpider(scrapy.Spider):
 
     def parse(self, response):
         fide_id = response.meta['fide_id']
-        print(f'Processing FIDE ID: {fide_id}')
-        print(response.meta)
         name = response.xpath('//div[@class="col-lg-8 profile-top-title"]/text()').get().strip()
         # Extract standard rating
         std_rating = response.xpath('//div[contains(@class, "profile-top-rating-data_gray")]/text()[normalize-space()]').get().strip()
