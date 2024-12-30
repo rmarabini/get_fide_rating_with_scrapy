@@ -4,8 +4,9 @@ import scrapy
 class FideSpider(scrapy.Spider):
     name = "fide_spider"
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, fide_id=None, *args, **kwargs):
         super(FideSpider, self).__init__(*args, **kwargs)
+        self.fide_id = fide_id
         self.fide_ids = [
             22226141,
             32066171,
@@ -22,6 +23,9 @@ class FideSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse, meta={'fide_id': fide_id})
 
     def parse(self, response):
+        fide_id = response.meta['fide_id']
+        print(f'Processing FIDE ID: {fide_id}')
+        print(response.meta)
         name = response.xpath('//div[@class="col-lg-8 profile-top-title"]/text()').get().strip()
         # Extract standard rating
         std_rating = response.xpath('//div[contains(@class, "profile-top-rating-data_gray")]/text()[normalize-space()]').get().strip()
@@ -34,5 +38,5 @@ class FideSpider(scrapy.Spider):
             'std_rating': std_rating,
             'rapid_rating': rapid_rating,
             'blitz_rating': blitz_rating,
-            'fide_id': self.fide_id,
+            'fide_id': fide_id,
         }
