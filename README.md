@@ -4,11 +4,11 @@ get fide player info from https://ratings.fide.com/profile/XXXXXXX page using sc
 This is working on Mon Dec 30 01:38:00 PM CET 2024
 but as soon as the fide modifies its web page you need to find the new xpaths with the information.
 
-Before running this you need to install the python module "scrapy".
+Before running this you need to install the python module "scrapy" (```pip install scrapy```).
 
 # how to run the program
-* Edit the file Fide.py and paste the Fide Ids you want to search (variable self.fide_ids)
-* the execute ```scrapy crawl fide_spider -O fide_rating.csv``` 
+* edit the file ```FIDE/spiders/Fide.py``` and paste the Fide Ids you want to search (variable self.fide_ids)
+* then execute ```scrapy crawl fide_spider -O fide_rating.csv``` 
 * the results are in the new file ```fide_rating.csv``` and they look as:
 
 ```
