@@ -4,9 +4,8 @@ import scrapy
 class FideSpider(scrapy.Spider):
     name = "fide_spider"
 
-    def __init__(self, fide_id=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super(FideSpider, self).__init__(*args, **kwargs)
-        self.fide_id = fide_id
         self.fide_ids = [
             22226141,
             32066171,
