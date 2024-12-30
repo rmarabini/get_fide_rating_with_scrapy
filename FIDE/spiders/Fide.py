@@ -23,6 +23,13 @@ class FideSpider(scrapy.Spider):
 
     def parse(self, response):
         fide_id = response.meta['fide_id']
+        # Extract FIDE ID from the page
+        # extracted_fide_id = response.xpath('//div[@class="profile-top-info__block__row__data"]/text()').get().strip()
+        extracted_fide_id = response.xpath('//div[contains(text(), "FIDE ID:")]/following-sibling::div/text()').get().strip()
+        print(f'Extracted FIDE ID: {extracted_fide_id}')      
+        # Assert that the extracted FIDE ID matches the one passed to the URL
+        assert str(fide_id) == str(extracted_fide_id), f"FIDE ID mismatch: {fide_id} != {extracted_fide_id}"
+        # Extract player name
         name = response.xpath('//div[@class="col-lg-8 profile-top-title"]/text()').get().strip()
         # Extract standard rating
         std_rating = response.xpath('//div[contains(@class, "profile-top-rating-data_gray")]/text()[normalize-space()]').get().strip()
