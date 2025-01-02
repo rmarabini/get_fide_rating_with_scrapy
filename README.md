@@ -17,3 +17,5 @@ name,std_rating,rapid_rating,blitz_rating,fide_id
 "Martinez Fernandez, Raul",2200,2069,2138,
 "Hernandez Ramos, David",2115,2138,1972,
 ```
+
+### You may be interested in this project (https://github.com/rmarabini/player_info_from_fide_database) where equivalent information is obtained downloading first the FIDE database
